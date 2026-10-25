@@ -1,0 +1,12 @@
+tag 800ee588ebeda91a5467f1a76e2f5e4580cc2bf9 v1.5.7a
+Author:	Hendrik Leppkes <h.leppkes@gmail.com>
+Date:	Wed Jul 12 14:10:42 2017 +0200
+
+Tag as v1.5.7a
+
+commit 75e6e716998513300c8f199d68702fe97f4b6e06
+Author: Hendrik Leppkes <h.leppkes@gmail.com>
+Date:   Wed Jul 12 14:08:10 2017 +0200
+
+    Switch locale export to ignore missing strings
+
