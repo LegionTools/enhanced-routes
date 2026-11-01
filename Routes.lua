@@ -2238,6 +2238,7 @@ do
 	local create_data = {}
 	local empty_table = {}
 	local source_data_choice = {}
+	local createVerifiedOnly = false
 
 	local function deep_copy_table(a, b)
 		for k, v in pairs(b) do
@@ -2451,6 +2452,16 @@ do
 			end,
 			tristate = true,
 		},
+		verified_only_choice = {
+			name = L["Verified Nodes Only"], type = "toggle",
+			desc = L["VERIFIED_ONLY_DESC"],
+			order = 260,
+			get = function() return createVerifiedOnly end,
+			set = function(info, v) createVerifiedOnly = v end,
+			disabled = function()
+				return not (Routes.plugins["GatherMate2"] and Routes.plugins["GatherMate2"].IsActive())
+			end,
+		},
 		add_route = {
 			name = L["Create Route"], type = "execute",
 			desc = L["Create Route"],
@@ -2482,6 +2493,17 @@ do
 							end
 						end
 					end
+				end
+
+				if createVerifiedOnly then
+					local mapFile = Routes.LZName[create_zone][1]
+					local verified = {}
+					for _, coord in ipairs(new_route.route) do
+						if Routes:IsNodeVerified(mapFile, coord) then
+							verified[#verified + 1] = coord
+						end
+					end
+					new_route.route = verified
 				end
 
 				if #new_route.route == 0 then

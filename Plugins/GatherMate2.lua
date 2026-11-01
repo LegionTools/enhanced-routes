@@ -102,6 +102,13 @@ local function InsertNode(event, zone, nodeType, coord, node_name)
 	-- Convert zone
 	local zoneLocalized = GatherMate2:MapLocalize(zone)
 	Routes:InsertNode(zoneLocalized, newCoord, node_name)
+
+	-- GatherMate2NodeAdded only fires for a real gathering cast (see
+	-- GatherMate2's Collector.lua), never for imported/shared data, so this
+	-- is a genuine on-the-ground confirmation of this exact coordinate.
+	if Routes.MarkNodeVerified and Routes.LZName[zoneLocalized] then
+		Routes:MarkNodeVerified(Routes.LZName[zoneLocalized][1], newCoord)
+	end
 end
 
 local function DeleteNode(event, zone, nodeType, coord, node_name)

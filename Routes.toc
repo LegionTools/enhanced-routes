@@ -45,6 +45,7 @@ TSP.lua
 # Routes Module files
 Modules\AutoShow.lua
 Modules\TomTom.lua
+Modules\NodeVerification.lua
 
 # Addons we can draw data from
 Plugins\GatherMate2.lua
